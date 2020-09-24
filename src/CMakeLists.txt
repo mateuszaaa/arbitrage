@@ -7,7 +7,11 @@ add_library(sources OBJECT
     market_connector.cpp
     http_get.h
     http_get.cpp
+    Parser.cpp
+    Parser.h
+    Price_info.h
 )
+
 target_link_libraries(sources
 PUBLIC
     ${SSL}
