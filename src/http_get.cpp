@@ -74,7 +74,13 @@ std::string get(const std::string& host, std::size_t port, const std::string& pa
         stream.shutdown(ec);
         std::stringstream ss;
         ss << res;
-        return ss.str();
+
+        // MOJE ROZWIAZANIE PROBLEMU NAGLOWKA //
+        std::string temp = ss.str();
+        temp.erase( 0, temp.find_first_of( "{" ));
+        return temp;
+        // STARA WERSJA //
+        // return ss.str();
     }
     catch(std::exception const& e)
     {

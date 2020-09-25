@@ -1,4 +1,4 @@
-#include "market_connector.h"
+#include "MarketConnector.h"
 
 MarketConnector::MarketConnector():
     host_("api.binance.com"),

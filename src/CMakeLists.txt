@@ -3,11 +3,15 @@ find_library(CRYPTO crypto)
 find_package (Threads REQUIRED)
 
 add_library(sources OBJECT
-    market_connector.h
-    market_connector.cpp
+    MarketConnector.h
+    MarketConnector.cpp
     http_get.h
     http_get.cpp
+    Parser.cpp
+    Parser.h
+    PriceInfo.h
 )
+
 target_link_libraries(sources
 PUBLIC
     ${SSL}
