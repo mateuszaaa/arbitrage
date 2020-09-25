@@ -2,7 +2,7 @@
 
 #include <string>
 
-struct Price_info{
+struct PriceInfo{
     std::string symbol;
     float bid_price;
     float bid_quantity;
@@ -10,7 +10,7 @@ struct Price_info{
     float ask_quantity; 
 };
 
-inline bool operator==(const Price_info& lhs, const Price_info& rhs){
+inline bool operator==(const PriceInfo& lhs, const PriceInfo& rhs){
     return 
     lhs.symbol == rhs.symbol && 
     lhs.bid_price == rhs.bid_price &&

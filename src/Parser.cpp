@@ -1,69 +1,65 @@
 #include "Parser.h"
-std::vector<Price_info> Parser::load (std::string data){
 
-    for (std::size_t i=0; i<=data.length(); i++){
-        if(data[i] == '"' or data[i] == '[' or data[i] == '{' or data[i] == ',' or data[i] == ':' or data[i] == '}'|| data[i] == ']' ){
-            data[i] = ' ';
-        }
-        if(data[i]=='s' and data[i+1]=='y' and data[i+2]=='m' and data[i+3]=='b' and data[i+4]=='o' and data[i+5]=='l'){
-            data[i]=' ';
-            data[i+1]=' ';
-            data[i+2]=' ';
-            data[i+3]=' '; 
-            data[i+4]=' ';
-            data[i+5]=' ';
-        }
-        if(data[i]=='b' and data[i+1]=='i' and data[i+2]=='d' and data[i+3]=='P' and data[i+4]=='r' and data[i+5]=='i'
-        and data[i+6]=='c' and data[i+7]=='e'){
-            data[i]=' ';
-            data[i+1]=' ';
-            data[i+2]=' ';
-            data[i+3]=' '; 
-            data[i+4]=' ';
-            data[i+5]=' ';
-            data[i+6]=' ';
-            data[i+7]=' ';
-        }
-        if(data[i]=='b' and data[i+1]=='i' and data[i+2]=='d' and data[i+3]=='Q' and data[i+4]=='t' and data[i+5]=='y'){
-            data[i]=' ';
-            data[i+1]=' ';
-            data[i+2]=' ';
-            data[i+3]=' '; 
-            data[i+4]=' ';
-            data[i+5]=' ';
-        }   
-        if(data[i]=='a' and data[i+1]=='s' and data[i+2]=='k' and data[i+3]=='P' and data[i+4]=='r' and data[i+5]=='i'
-        and data[i+6]=='c' and data[i+7]=='e'){
-            data[i]=' ';
-            data[i+1]=' ';
-            data[i+2]=' ';
-            data[i+3]=' '; 
-            data[i+4]=' ';
-            data[i+5]=' ';
-            data[i+6]=' ';
-            data[i+7]=' ';
-        }        
-        if(data[i]=='a' and data[i+1]=='s' and data[i+2]=='k' and data[i+3]=='Q' and data[i+4]=='t' and data[i+5]=='y'){
-            data[i]=' ';
-            data[i+1]=' ';
-            data[i+2]=' ';
-            data[i+3]=' '; 
-            data[i+4]=' ';
-            data[i+5]=' ';
-        }
-    }
-    std::stringstream stream;
-    stream << data;
-    Price_info temp = {};
-    while (true){
-        if(not (stream >> temp.symbol)){
-            break;
-        }        stream >> temp.bid_price;
-        stream >> temp.bid_quantity;
-        stream >> temp.ask_price;
-        stream >> temp.ask_quantity;
+bool Parser::should_be_removed(char data) {
+  return data == '"' or data == '[' or data == '{' or data == ',' or
+         data == ':' or data == '}' or data == ']';
+}
 
-        Parser::data.push_back(temp);    
+bool Parser::matches_string(const std::string &temp, int j, std::string str) {
+    auto ret = temp.find(str, j);
+    return ret == j;
+}
+
+void Parser::fill_with_spaces(std::string &data, int i, int length) {
+  for (int j = 0; j < length; ++j) {
+    data[i+j] = ' ';
+  }
+}
+
+void Parser::prepare_string(std::string &data) {
+  for (std::size_t i = 0; i < data.length(); i++) {
+    if (should_be_removed(data[i])) {
+      data[i] = ' ';
     }
-    return Parser::data;
+
+    if (matches_string(data, i, "symbol")) {
+      fill_with_spaces(data, i, std::string("symbol").size());
+    }
+    if (matches_string(data, i, "bidPrice")) {
+      fill_with_spaces(data, i, std::string("bidPrice").size());
+    }
+    if (matches_string(data, i, "bidQty")) {
+      fill_with_spaces(data, i, std::string("bidQty").size());
+    }
+    if (matches_string(data, i, "askPrice")) {
+      fill_with_spaces(data, i, std::string("askPrice").size());
+    }
+    if (matches_string(data, i, "askQty")) {
+      fill_with_spaces(data, i, std::string("askQty").size());
+    }
+  }
+}
+
+std::vector<PriceInfo> Parser::load(const std::string &input_string) {
+  std::string data = input_string;
+  prepare_string(data);
+  std::cout << data << std::endl;
+
+  std::vector<PriceInfo> result;
+  std::stringstream stream;
+  stream << data;
+  
+  while (true) {
+    PriceInfo temp;
+
+    if (not(stream >> temp.symbol)) {
+      break;
+    }
+    stream >> temp.bid_price;
+    stream >> temp.bid_quantity;
+    stream >> temp.ask_price;
+    stream >> temp.ask_quantity;
+    result.push_back(temp);
+  }
+  return result;
 }
