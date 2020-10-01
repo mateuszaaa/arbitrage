@@ -3,18 +3,14 @@
 #include "http_get.h"
 #include "PriceInfo.h"
 #include "Parser.h"
+#include <map>
 
 
-int main(int argc, char** argv)
-{
+
+int main(int argc, char** argv){
     std::cout << "starting crypto bot" << std::endl;
     std::cout << "connecting to market" << std::endl;
-
-
     std::string binance_string = get("api.binance.com", 443, "/api/v3/ticker/bookTicker");
-
-
-
     Parser binance_data;
     std::cout << binance_string << std::endl;
     std::vector<PriceInfo> result = binance_data.load(binance_string);
@@ -22,4 +18,5 @@ int main(int argc, char** argv)
     std::cout << result[i].symbol << std::endl;
     }
     std::cout << "stopping crypto bot" << std::endl;
+    return 0;
 }
