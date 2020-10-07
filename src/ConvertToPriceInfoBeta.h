@@ -15,7 +15,6 @@ public:
          */
 std::vector<PriceInfoBeta> convert(std::vector<PriceInfo>);
 private:
-std::pair<PriceInfoBeta, PriceInfoBeta> convert_to_PriceInfoBeta_v1(PriceInfo info, std::string crypto);
-std::pair<PriceInfoBeta, PriceInfoBeta> convert_to_PriceInfoBeta_v2(PriceInfo info, std::string crypto, int pos);
-void search_crypto_valut(std::vector<PriceInfo>& price_infos, std::string& crypto, std::vector<std::string>& crypto_name, std::unordered_set<std::string>& crypto_set);
+std::pair<PriceInfoBeta, PriceInfoBeta> convert_to_PriceInfoBeta(PriceInfo info, std::string crypto);
+std::vector<std::string> search_crypto_valut(std::vector<PriceInfo>& price_infos);
 };
