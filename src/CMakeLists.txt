@@ -11,8 +11,8 @@ add_library(sources OBJECT
     Parser.h
     PriceInfo.h
     PriceInfoBeta.h
-    ExpandToPriceInfoBeta.h
-    ExpandToPriceInfoBeta.cpp
+    ConvertToPriceInfoBeta.h
+    ConvertToPriceInfoBeta.cpp
 )
 
 target_link_libraries(sources
