@@ -24,22 +24,22 @@ std::pair<PriceInfoBeta, PriceInfoBeta> ConvertToPriceInfoBeta::convert_to_Price
 
 std::vector<std::string> ConvertToPriceInfoBeta::search_crypto_valut(std::vector<PriceInfo>& price_infos){
     std::vector<std::string> crypto_name = {"BTC"};
-    std::unordered_set<std::string> crypto_set = {"BTC"};  
     for(auto info: price_infos){
             auto pos = info.symbol.find("BTC");  
-            if (pos != std::string::npos){
-                if(crypto_set.find(info.symbol.substr("BTC"s.size(), info.symbol.size()))==crypto_set.end() && pos==0 ){
-                    auto new_crypto = info.symbol.substr("BTC"s.size(), info.symbol.size());
-                    crypto_set.insert(new_crypto);
-                    crypto_name.push_back(new_crypto);
-                }
-                if(crypto_set.find(info.symbol.substr(0, pos))==crypto_set.end() && pos!=0){
-                    auto new_crypto = info.symbol.substr(0, pos);
-                    crypto_set.insert(new_crypto);
-                    crypto_name.push_back(new_crypto);
-                }
+            if (pos == std::string::npos){
+                continue;
             }
-        }
+
+            if( pos==0 ){
+                auto new_crypto = info.symbol.substr("BTC"s.size(), info.symbol.size());
+                crypto_name.push_back(new_crypto);
+            }
+
+            if( pos!=0 ){
+                auto new_crypto = info.symbol.substr(0, pos);
+                crypto_name.push_back(new_crypto);
+            }
+    }
     return crypto_name;
 }
 
