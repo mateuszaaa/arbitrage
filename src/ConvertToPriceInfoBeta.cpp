@@ -39,6 +39,9 @@ std::vector<std::string> ConvertToPriceInfoBeta::search_crypto_valut(std::vector
                 auto new_crypto = info.symbol.substr(0, pos);
                 crypto_name.push_back(new_crypto);
             }
+
+            std::cout << "processing" << info.symbol << " into " <<crypto_name.back() << std::endl;
+
     }
     return crypto_name;
 }
@@ -56,7 +59,10 @@ std::vector<PriceInfoBeta> ConvertToPriceInfoBeta::convert(std::vector<PriceInfo
     for(auto info: price_infos){
             for(auto crypto : crypto_name){    
                 auto pos= info.symbol.find(crypto);
-                auto find_rest= crypto_set.find(info.symbol.substr(crypto.size(), info.symbol.size()));
+                if(crypto.size() > info.symbol.size()){
+                    continue;
+                }
+                auto find_rest= crypto_set.find(info.symbol.substr(crypto.size()));
                 if (pos==0 && find_rest !=crypto_set.end()){
                     auto result = convert_to_PriceInfoBeta(info, crypto);
                     auto beta1=result.first;

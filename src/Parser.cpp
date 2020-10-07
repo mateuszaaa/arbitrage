@@ -43,7 +43,6 @@ void Parser::prepare_string(std::string &data) {
 std::vector<PriceInfo> Parser::load(const std::string &input_string) {
   std::string data = input_string;
   prepare_string(data);
-  std::cout << data << std::endl;
 
   std::vector<PriceInfo> result;
   std::stringstream stream;
