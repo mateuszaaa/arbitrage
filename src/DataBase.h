@@ -5,15 +5,16 @@
 
 class DataBase{
     public:
+    /**
+     * @brief mapping joins between all valut, 
+     * calculating profit of vector's valut
+     * calculating opportunity of single jump from 1 to next valut
+     * 
+     * @return 
+     */
         void read(std::vector<CrytpoConversionInfo>);
-    
         std::vector<std::string> get_connections(const std::string&);
-
         double calculate_profit(std::vector<std::string>);
-        // TODO przeczytaj o wyjatkach/exceptions
-        // jak rzucic i zlapac wyjatek
-        // jak testowac rzucenie wujatku "ASSERT_THROW"
-
         double convert_crypto(std::string from, std::string to);
 
     private:
