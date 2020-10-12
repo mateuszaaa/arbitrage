@@ -5,12 +5,12 @@ void DataBase::read(std::vector<CrytpoConversionInfo> input_vec){
         map_from_to.insert({i.from + i.to, i});
         if (map_for_connections.find(i.from) == map_for_connections.end()){
             std::vector<std::string> vec;
-            map_for_connections.insert({i.from, vec});
             for (auto j : input_vec){
                 if(i.from==j.from){
                     vec.push_back(j.to);
                 }
             }
+            map_for_connections.insert({i.from, vec});
         }
     }
 }

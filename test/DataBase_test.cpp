@@ -49,3 +49,13 @@ TEST(DataBase_test, 3th_test){
     Data.read(vec);
     ASSERT_THROW(Data.calculate_profit_expressed_decimal_number(std::vector<std::string>({"AAA", "BBB", "ZZZ", "YYY"})), std::invalid_argument);
 }
+
+TEST(DataBase_test, 4th_test){
+    
+    CrytpoConversionInfo pricebeta_ab = {"AAA", "BBB", 1, 1};
+    auto vec = std::vector<CrytpoConversionInfo>({pricebeta_ab}); 
+    
+    DataBase Data;
+    Data.read(vec);
+    EXPECT_FALSE(Data.get_connections("AAA").empty());
+}
