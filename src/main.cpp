@@ -3,7 +3,7 @@
 #include "http_get.h"
 #include "PriceInfo.h"
 #include "Parser.h"
-#include "ConvertToPriceInfoBeta.h"
+#include "ConvertToCryptoConversionInfo.h"
 #include <map>
 
 
@@ -15,7 +15,7 @@ int main(int argc, char** argv){
     Parser binance_data;
     std::vector<PriceInfo> result = binance_data.load(binance_string);
 
-    ConvertToPriceInfoBeta converter;
+    ConvertToCryptoConversionInfo converter;
     auto connections = converter.convert(result);
 
     std::cout << "found " << connections.size() << std::endl;

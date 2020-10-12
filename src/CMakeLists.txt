@@ -10,9 +10,11 @@ add_library(sources OBJECT
     Parser.cpp
     Parser.h
     PriceInfo.h
-    PriceInfoBeta.h
-    ConvertToPriceInfoBeta.h
-    ConvertToPriceInfoBeta.cpp
+    CrytpoConversionInfo.h
+    ConvertToCryptoConversionInfo.h
+    ConvertToCryptoConversionInfo.cpp
+    DataBase.h
+    DataBase.cpp
 )
 
 target_link_libraries(sources

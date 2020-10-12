@@ -1,14 +1,13 @@
 #pragma once
 #include <string>
-struct PriceInfoBeta{
+struct CrytpoConversionInfo{
     std::string from;
     std::string to;
     float bid_price;
     float bid_quantity; 
-
 };
 
-inline bool operator==(const PriceInfoBeta& lhs, const PriceInfoBeta& rhs){
+inline bool operator==(const CrytpoConversionInfo& lhs, const CrytpoConversionInfo& rhs){
     return 
     lhs.from == rhs.from &&
     lhs.to == rhs.to && 
