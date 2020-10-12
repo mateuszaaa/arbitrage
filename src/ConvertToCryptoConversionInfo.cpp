@@ -22,7 +22,7 @@ std::pair<CrytpoConversionInfo, CrytpoConversionInfo> ConvertToCryptoConversionI
     return {beta1, beta2};
 }
 
-std::vector<std::string> ConvertToCryptoConversionInfo::search_crypto_valut(std::vector<PriceInfo>& price_infos){
+std::vector<std::string> ConvertToCryptoConversionInfo::search_crypto_names(std::vector<PriceInfo>& price_infos){
     std::vector<std::string> crypto_name = {"BTC"};
     for(auto info: price_infos){
             auto pos = info.symbol.find("BTC");  
@@ -53,7 +53,7 @@ std::vector<std::string> ConvertToCryptoConversionInfo::search_crypto_valut(std:
 std::vector<CrytpoConversionInfo> ConvertToCryptoConversionInfo::convert(std::vector<PriceInfo> price_infos){
     std::vector<CrytpoConversionInfo> output;
 
-    auto crypto_name = search_crypto_valut(price_infos);
+    auto crypto_name = search_crypto_names(price_infos);
 
     std::unordered_set<std::string> crypto_set;
     for(auto str: crypto_name){

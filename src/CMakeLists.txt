@@ -15,6 +15,8 @@ add_library(sources OBJECT
     ConvertToCryptoConversionInfo.cpp
     DataBase.h
     DataBase.cpp
+    AlgorithmBuyAndSell.h
+    AlgorithmBuyAndSell.cpp
 )
 
 target_link_libraries(sources

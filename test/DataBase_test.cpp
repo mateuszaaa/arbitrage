@@ -13,7 +13,7 @@ TEST(DataBase_test, 1st_test){
     
     DataBase Data;
     Data.read(vec);
-    double resault = Data.calculate_profit(std::vector<std::string>({"AAA", "BBB", "CCC", "AAA"}));
+    double resault = Data.calculate_profit_expressed_decimal_number(std::vector<std::string>({"AAA", "BBB", "CCC", "AAA"}));
     double expect_resault = 1*3*5;
     
     EXPECT_EQ(resault, expect_resault);
@@ -30,7 +30,7 @@ TEST(DataBase_test, 2nd_test){
     
     DataBase Data;
     Data.read(vec);
-    double resault = Data.convert_crypto("BBB", "CCC");
+    double resault = Data.ratio_fromBTC_to_fromtoBTC("BBB", "CCC");
     double expect_resault = 3.0*5.0/2.0;
     
     EXPECT_EQ(resault, expect_resault);
@@ -47,5 +47,5 @@ TEST(DataBase_test, 3th_test){
     
     DataBase Data;
     Data.read(vec);
-    ASSERT_THROW(Data.calculate_profit(std::vector<std::string>({"AAA", "BBB", "ZZZ", "YYY"})), std::invalid_argument);
+    ASSERT_THROW(Data.calculate_profit_expressed_decimal_number(std::vector<std::string>({"AAA", "BBB", "ZZZ", "YYY"})), std::invalid_argument);
 }

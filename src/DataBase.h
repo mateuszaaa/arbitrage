@@ -14,8 +14,8 @@ class DataBase{
      */
         void read(std::vector<CrytpoConversionInfo>);
         std::vector<std::string> get_connections(const std::string&);
-        double calculate_profit(std::vector<std::string>);
-        double convert_crypto(std::string from, std::string to);
+        double calculate_profit_expressed_decimal_number(std::vector<std::string>);
+        double ratio_fromBTC_to_fromtoBTC(std::string from, std::string to);
 
     private:
         std::unordered_map<std::string, std::vector<std::string>> map_for_connections;

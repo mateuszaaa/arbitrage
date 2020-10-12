@@ -16,5 +16,5 @@ public:
 std::vector<CrytpoConversionInfo> convert(std::vector<PriceInfo>);
 private:
 std::pair<CrytpoConversionInfo, CrytpoConversionInfo> convert_to_CrytpoConversionInfo(PriceInfo info, std::string crypto);
-std::vector<std::string> search_crypto_valut(std::vector<PriceInfo>& price_infos);
+std::vector<std::string> search_crypto_names(std::vector<PriceInfo>& price_infos);
 };
