@@ -1,4 +1,5 @@
 #include "Parser.h"
+#include <algorithm>
 
 bool Parser::should_be_removed(char data) {
   return data == '"' or data == '[' or data == '{' or data == ',' or
@@ -58,7 +59,9 @@ std::vector<PriceInfo> Parser::load(const std::string &input_string) {
     stream >> temp.bid_quantity;
     stream >> temp.ask_price;
     stream >> temp.ask_quantity;
-    result.push_back(temp);
+    if(temp.bid_price >= 10E-6 and temp.ask_price >= 10E-6 and temp.symbol.find("UP") == std::string::npos and temp.symbol.find("DOWN") == std::string::npos){
+      result.push_back(temp);
+    }
   }
   return result;
 }
