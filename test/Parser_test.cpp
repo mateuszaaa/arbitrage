@@ -55,7 +55,7 @@ TEST(Parser_test, third_test){
     std::vector<PriceInfo> input;
     Parser string;
     input = string.load(
-        R"([{""}])");
+        R"([])");
     
     std::vector<PriceInfo> output;
     

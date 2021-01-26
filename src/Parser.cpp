@@ -1,67 +1,27 @@
 #include "Parser.h"
 #include <algorithm>
-
-bool Parser::should_be_removed(char data) {
-  return data == '"' or data == '[' or data == '{' or data == ',' or
-         data == ':' or data == '}' or data == ']';
-}
-
-bool Parser::matches_string(const std::string &temp, int j, std::string str) {
-    auto ret = temp.find(str, j);
-    return ret == j;
-}
-
-void Parser::fill_with_spaces(std::string &data, int i, int length) {
-  for (int j = 0; j < length; ++j) {
-    data[i+j] = ' ';
-  }
-}
-
-void Parser::prepare_string(std::string &data) {
-  for (std::size_t i = 0; i < data.length(); i++) {
-    if (should_be_removed(data[i])) {
-      data[i] = ' ';
-    }
-
-    if (matches_string(data, i, "symbol")) {
-      fill_with_spaces(data, i, std::string("symbol").size());
-    }
-    if (matches_string(data, i, "bidPrice")) {
-      fill_with_spaces(data, i, std::string("bidPrice").size());
-    }
-    if (matches_string(data, i, "bidQty")) {
-      fill_with_spaces(data, i, std::string("bidQty").size());
-    }
-    if (matches_string(data, i, "askPrice")) {
-      fill_with_spaces(data, i, std::string("askPrice").size());
-    }
-    if (matches_string(data, i, "askQty")) {
-      fill_with_spaces(data, i, std::string("askQty").size());
-    }
-  }
-}
+#include <boost/property_tree/json_parser.hpp>
+#include <sstream>
+#include <iostream>
 
 std::vector<PriceInfo> Parser::load(const std::string &input_string) {
-  std::string data = input_string;
-  prepare_string(data);
+  std::stringstream input_stream;
+  input_stream << input_string; 
+  boost::property_tree::ptree pt;
+  boost::property_tree::read_json(input_stream, pt);
 
   std::vector<PriceInfo> result;
-  std::stringstream stream;
-  stream << data;
-  
-  while (true) {
+  // BOOST_FOREACH( ptree::value_type const& v, pt.get_child("symbol")) {
+  // auto x = pt.get_child(0);
+  // std::cout << x.first << std::endl;
+  for(auto &v : pt){
     PriceInfo temp;
-
-    if (not(stream >> temp.symbol)) {
-      break;
-    }
-    stream >> temp.bid_price;
-    stream >> temp.bid_quantity;
-    stream >> temp.ask_price;
-    stream >> temp.ask_quantity;
-    if(temp.bid_price >= 10E-6 and temp.ask_price >= 10E-6 and temp.symbol.find("UP") == std::string::npos and temp.symbol.find("DOWN") == std::string::npos){
-      result.push_back(temp);
-    }
+    temp.symbol = v.second.get<std::string>("symbol");
+    temp.bid_price = v.second.get<float>("bidPrice");
+    temp.bid_quantity = v.second.get<float>("bidQty");
+    temp.ask_price = v.second.get<float>("askPrice");
+    temp.ask_quantity = v.second.get<float>("askQty");
+    result.push_back(temp);
   }
   return result;
 }

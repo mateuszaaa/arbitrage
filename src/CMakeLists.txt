@@ -17,7 +17,7 @@ add_library(sources OBJECT
     DataBase.cpp
     AlgorithmBuyAndSell.h
     AlgorithmBuyAndSell.cpp
-)
+    )
 
 target_link_libraries(sources
 PUBLIC

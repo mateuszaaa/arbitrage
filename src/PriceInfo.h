@@ -8,6 +8,7 @@ struct PriceInfo{
     float bid_quantity;
     float ask_price;
     float ask_quantity; 
+    bool cancelled;
 };
 
 inline bool operator==(const PriceInfo& lhs, const PriceInfo& rhs){
@@ -16,5 +17,5 @@ inline bool operator==(const PriceInfo& lhs, const PriceInfo& rhs){
     lhs.bid_price == rhs.bid_price &&
     lhs.bid_quantity == rhs.bid_quantity &&
     lhs.ask_price == rhs.ask_price &&
-    lhs.ask_quantity == lhs.ask_quantity;
+    lhs.ask_quantity == rhs.ask_quantity;
 }
